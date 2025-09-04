@@ -13,7 +13,7 @@ public class Main {
         while (true) {
             mostrarMenu();
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
+            scanner.nextLine(); // Salto de línea
 
             try {
                 procesarOpcion(opcion);
@@ -23,17 +23,20 @@ public class Main {
         }
     }
 
+    // Se crearon opciones para ingresar al banco
+
     private static void mostrarMenu() {
         System.out.println("\n=== BANCO ===");
         System.out.println("1. Crear cuenta");
         System.out.println("2. Depositar");
         System.out.println("3. Retirar");
         System.out.println("4. Transferir");
-        System.out.println("5. Consultar saldo");
+        System.out.println("5. Consultar tu saldo");
         System.out.println("6. Salir");
         System.out.print("Seleccione una opción: ");
     }
 
+    // Opciones con switch para entrar a cada caso
     private static void procesarOpcion(int opcion) {
         switch (opcion) {
             case 1:
