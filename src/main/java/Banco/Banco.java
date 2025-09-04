@@ -36,5 +36,44 @@ public class Banco {
         guardarCuentas();
     }
 
-    
+    public void transferir(String cuentaOrigen, String cuentaDestino, double monto) {
+        Cuenta origen = obtenerCuenta(cuentaOrigen);
+        Cuenta destino = obtenerCuenta(cuentaDestino);
+        origen.retirar(monto);
+        destino.depositar(monto);
+        guardarCuentas();
+    }
+
+    public double consultarSaldo(String numeroCuenta) {
+        return obtenerCuenta(numeroCuenta).getSaldo();
+    }
+
+    private Cuenta obtenerCuenta(String numeroCuenta) {
+        Cuenta cuenta = cuentas.get(numeroCuenta);
+        if (cuenta == null) {
+            throw new IllegalArgumentException("La cuenta no existe");
+        }
+        return cuenta;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void cargarCuentas() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARCHIVO_DATOS))) {
+            cuentas = (Map<String, Cuenta>) ois.readObject();
+        } catch (FileNotFoundException e) {
+            cuentas = new HashMap<>();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            cuentas = new HashMap<>();
+        }
+    }
+
+    private void guardarCuentas() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARCHIVO_DATOS))) {
+            oos.writeObject(cuentas);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
