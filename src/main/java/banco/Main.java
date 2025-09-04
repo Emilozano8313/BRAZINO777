@@ -1,4 +1,3 @@
-package banco;
 
 import java.util.Scanner;
 

@@ -1,10 +1,6 @@
-package banco;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-
-import banco.Cuenta;
 
 public class Banco {
     private Map<String, Cuenta> cuentas;
@@ -74,6 +70,10 @@ public class Banco {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Cuenta obtenerDetallesCuenta(String numeroCuenta) {
+        return obtenerCuenta(numeroCuenta);
     }
 }
 
